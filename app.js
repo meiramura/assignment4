@@ -7,13 +7,13 @@ const path = require('path');
 const ejs = require('ejs');
 const request = require('request');
 const bcrypt = require('bcryptjs');
-const saltRounds = 10; // Number of salt rounds (higher is more secure but slower)
+const saltRounds = 10; 
 const app = express();
-const cors = require('cors');
+
 const port = process.env.PORT || 3000;
 
 
-app.use(cors());
+
 app.use(session({
     secret: 'your-secret-key',
     resave: false,
@@ -78,8 +78,8 @@ const captureHistory = async (req, res, next) => {
 };
 
 app.get('/news', async (req, res) => {
-    const apiKey = '2f6272a347d54537974d3fd6de9c71f4'; // Replace with your actual API key
-    const topic = req.query.topic || 'clothing fashion'; // Default to 'fashion' if no specific topic is provided
+    const apiKey = '2f6272a347d54537974d3fd6de9c71f4'; 
+    const topic = req.query.topic || 'clothing fashion'; 
 
     const options = {
         method: 'GET',
@@ -139,7 +139,7 @@ const itemSchema = new mongoose.Schema({
 
 const Item = mongoose.model('Item', itemSchema);
 app.get('/admin/create',  (req, res) => {
-    // Render the create item form
+
     res.render('createItem');
 });
 app.post('/admin/create', async (req, res) => {
@@ -193,7 +193,7 @@ app.get('/admin', authenticateAdmin, async (req, res) => {
     try {
         const users = await User.find();
         const items = await Item.find();
-        res.render('admin', { users, items }); // Pass both users and items to the template
+        res.render('admin', { users, items });
     } catch (error) {
         console.error('Error fetching data:', error);
         res.status(500).send('Internal Server Error');
@@ -331,7 +331,7 @@ app.post('/login', async (req, res) => {
             if (isPasswordValid) {
                 if (user.isAdmin === true) {
                     req.session.userId = user._id;
-                    req.session.isAdmin = true;  // Set isAdmin to true for admin
+                    req.session.isAdmin = true;  
                     req.session.username = user.username;
                     return res.redirect('/admin');
                 }
