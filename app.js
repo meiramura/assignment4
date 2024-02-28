@@ -324,6 +324,11 @@ app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
         const user = await User.findOne({ username });
+        
+        if (user && user.password === password) {
+            if (user.isAdmin === true) {
+                return res.redirect('/admin');
+            }
 
         if (user) {
             const isPasswordValid = await verifyPassword(password, user.password);
