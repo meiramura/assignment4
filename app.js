@@ -9,11 +9,11 @@ const request = require('request');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10; 
 const app = express();
-
+const cors = require('cors');
 const port = process.env.PORT || 3000;
 
 
-
+app.use(cors());
 app.use(session({
     secret: 'your-secret-key',
     resave: false,
