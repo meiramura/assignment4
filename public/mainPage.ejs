@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6e9f42f0cc.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+    <title>proekt</title>
+    <script type="text/javascript">
+        var linguJSON = {
+    "languages": [
+        {
+            "lang_name": "English",
+            "lang_code": "en",
+            "url_pattern": "?"
+        },
+        {
+            "lang_name": "Russian",
+            "lang_code": "ru",
+            "url_pattern": "?"
+        }
+    ],
+    "translated_segments": [
+        {
+            "source": "<b>Welcome, <%= username %>!</b>",
+            "target": "<b>Добро пожаловать, <%= username %>!</b>"
+        },
+        {
+            "source": "<em>New Collection</em>",
+            "target": "<em>Новая Коллекция</em>"
+        },
+        {
+            "source": "Check Out!",
+            "target": "Проверяй!"
+        },
+        {
+            "source": "Discount For",
+            "target": "Скидка На"
+        },
+        {
+            "source": "<b>Add to cart</b>",
+            "target": "<b>Добавить в Корзину</b>"
+        },
+        {
+            "source": "About Us",
+            "target": "О Нас"
+        },
+        {
+            "source": "Contact Info",
+            "target": "Контакты"
+        },
+        {
+            "source": "For Customer",
+            "target": "Для Покупателя"
+        },
+        {
+            "source": "Newsletter",
+            "target": "Новости"
+            
+        },
+        {
+            "source": "For Sale",
+            "target": "На Расспродажу"
+            
+        },
+        {
+            "source": "Home",
+            "target": "Главная"
+        },
+        {
+            "source": "Stay With Us!",
+            "target": "Оставайся с нами!"
+        },
+        {
+            "source": "About",
+            "target": "О Нас"
+        },
+        {
+            "source": "Sale",
+            "target": "Расспродажа"
+        }
+    ]
+};
+
+    </script>
+
+
+    <nav class = "navbar navbar-expand-md sticky-top bg-white">
+        <div class = "container-fluid">
+            <div class = "collapse navbar-collapse">
+                <ul class = "navbar-nav fw-bold mx-auto gap-5 ">
+                    <li class = "nav-item text-decoration-none"><a class = "text-black" href="#">Home</a></li>
+                    <li class = "nav-item text-decoration-none"><a class = "text-black" href="#about">About</a></li>
+                    <li class = "nav-item text-decoration-none"><a class = "text-black" href="#sale">Sale</a></li>
+                    <li class = "nav-item text-decoration-none"><a class = "text-black" href="/news">News</a></li>
+                </ul>
+                <div class = "navbar-brand">
+                    <a href = "/main">
+                        <img alt="" src="logo.png">
+                    </a>
+                </div>
+                <div class = "navbar mx-auto gap-5">
+                    <div class = "dropdown search">
+                        <a class="btn dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-search text-black"></i>
+                        </a>
+                        <div class = "dropdown-menu">
+                            <div class = "dropdown-item search-form">
+                                <input type = "search" id = "search-box" placeholder="search here">
+                                <label class="fas fa-search" for = "search-box"></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="auth">
+                        <a class="btn dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-user text-black"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <% if (!username) { %>
+                                <a class="dropdown-item" href="/login">Log In</a>
+                            <% } else { %>
+                                <span class="dropdown-item text-success"><%= username %></span>
+                                <a class="dropdown-item" href="/logout">Log Out</a>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div>
+                        <button id="viewCart" data-bs-toggle="modal" data-bs-target="#cartModal" class="fa-solid fa-cart-shopping text-black">
+                            <span id="cartItemCount" style="display: none;">0</span>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+
+</head>
+<body>
+
+    <section class = "page">
+        <div class = "page-text">
+            <h3 class = "display -5 text-success"><b>Welcome, <%= username %>!</b></h3>
+            <h2 class = "display-4 text-white"><em>New Collection</em></h2>
+            <h1 class = "display-3 text-black">Check Out!</h1>
+        </div>
+
+    </section>
+    <div class = "content d-flex justify-content-center align-items-center position-relative">
+        <div class = "d-block justify-content-center position-relative align-items-center">
+            <h1>-70% <b>Discount For</b><em class = "text-danger pr-5 pl-5">NB-2002r!</em></h1>
+            <button class = "button"><b>Add to cart</b></button>
+        </div>
+        <div class = "model"><img src = "nb.jpg"></div>
+    </div>
+
+    <section id = "sale">
+
+
+
+        <h1 class = "display-1 justify-content-center d-flex p-5">For Sale</h1>
+        <div class="countdown-container">
+            <div id="countdown" class="countdown"></div>
+        </div>
+        <script>
+
+            let countdown = 86400;
+            let countdownElement = document.getElementById("countdown");
+
+            function updateCountdown() {
+                const hours = Math.floor(countdown / 3600);
+                const minutes = Math.floor((countdown % 3600) / 60);
+                const seconds = countdown % 60;
+
+                countdownElement.innerText = `${hours}h ${minutes}m ${seconds}s`;
+
+                countdown--;
+
+                if (countdown < 0) {
+                    clearInterval(timer);
+                    alert("Flash sale has ended!");
+                }
+            }
+
+            let timer = setInterval(updateCountdown, 1000);
+        </script>
+
+        <div class = "container mb-5 pb-5">
+            <div class = "row">
+              <% items.forEach(item => { %>
+                <div class = "col-lg-4 col-md-6 col-sm-12 product">
+                    <img src="<%= item.image %>" class = "img-fluid" alt="<%= item.title %>">
+                    <h3><%= item.title %></h3>
+                    <div class = "price">
+                        <% const Price = parseFloat(item.price); %>
+                        <span class = "discounted">$<%= Price.toFixed(2) %></span>
+                        <% const originalPrice = parseFloat(item.price) + 15; %>
+                        <span class="original">$<%= originalPrice.toFixed(2) %></span>
+                        
+                        <button onclick="showPopup(), addToCart('<%= item.title %>', '<%= item.image %>', '<%= item.price %>')" class="add-to-cart cart fa-solid fa-cart-shopping" style="color: #000000;"></button>
+                        <input type="number" class="quantity" value="1" min="1">
+                    </div>
+                </div>
+              <% }); %>
+            </div>
+            <div id="popup">
+                <div id="tick">✓</div>
+            </div>
+
+
+            <script>
+                function showPopup() {
+                    var popup = document.getElementById('popup');
+                    popup.classList.add('show');
+
+                    setTimeout(function() {
+                        popup.classList.remove('show');
+                    }, 2000); // Adjust the duration as needed
+                }
+            </script>
+        </div>
+
+        <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h5 class="modal-title" id="cartModalLabel">Your Shopping Cart</h5>
+                        <span id="totalCost" class = "text-white"></span>
+                    </div>
+
+                    <div class="modal-body">
+                        <ul id="cartItems">
+                            <!-- Cart items will be displayed here -->
+
+                        </ul>
+                    </div>
+
+                    <div class="modal-footer">
+                      <button id="checkoutButton" class="btn bg-primary" onclick="checkout()">Checkout</button>
+
+                      <button type="button" class="btn btn-secondary" data-dismiss="cartModal">Close</button>
+
+                    </div>
+                    <div id="confirmationMessage" class="alert alert-success hidden">
+                        Thank you for your purchase! Your order has been confirmed.
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        
+          <!-- Add this script tag to your HTML file -->
+          <script>
+            function getShoppingCartFromLocalStorage() {
+                return JSON.parse(localStorage.getItem('shoppingCart')) || [];
+            }
+        
+            function saveShoppingCartToLocalStorage(cartData) {
+                localStorage.setItem('shoppingCart', JSON.stringify(cartData));
+            }
+        
+            const shoppingCart = getShoppingCartFromLocalStorage();
+        
+            function updateCartItemCountOnLoad() {
+                const cartItemCountElement = document.getElementById("cartItemCount");
+                const totalItems = shoppingCart.reduce((total, item) => total + item.quantity, 0);
+                cartItemCountElement.innerText = totalItems.toString();
+        
+                if (totalItems > 0) {
+                    cartItemCountElement.style.display = "inline-block";
+                } else {
+                    cartItemCountElement.style.display = "none";
+                }
+            }
+        
+            updateCartItemCountOnLoad();
+        
+            function updateCartDisplay() {
+                const cartItems = document.getElementById("cartItems");
+                while (cartItems.firstChild) {
+                    cartItems.removeChild(cartItems.firstChild);
+                }
+        
+                shoppingCart.forEach((item, index) => {
+                    const cartItem = document.createElement("li");
+                    cartItem.textContent = ` ${item.title}, Price: ${item.price}, Quantity: ${item.quantity}`;
+                    const cartImage = document.createElement("img");
+                    cartImage.src = item.image;
+                    cartItem.appendChild(cartImage);
+        
+                    const removeButton = document.createElement("button");
+                    removeButton.textContent = "Remove";
+                    removeButton.addEventListener("click", function () {
+                        shoppingCart.splice(index, 1);
+                        saveShoppingCartToLocalStorage(shoppingCart);
+                        updateCartDisplay();
+                        if (cartItemCount > 0) {
+                            cartItemCount--;
+                            updateCartItemCount();
+                        }
+                    });
+                    cartItem.appendChild(removeButton);
+        
+                    cartItems.appendChild(cartItem);
+                });
+        
+                calculateTotalPrice();
+                updateCartItemCount();
+            }
+        
+            const addToCartButtons = document.querySelectorAll(".add-to-cart");
+            addToCartButtons.forEach((button, index) => {
+                button.addEventListener("click", function () {
+                    const itemContainer = button.closest('.product');
+                    const itemDetails = {
+                        image: itemContainer.querySelector(".img-fluid").src,
+                        title: itemContainer.querySelector("h3").textContent,
+                        price: itemContainer.querySelector(".discounted").textContent,
+                        quantity: parseInt(itemContainer.querySelector(".quantity").value),
+                    };
+                    shoppingCart.push(itemDetails);
+                    saveShoppingCartToLocalStorage(shoppingCart);
+                    updateCartItemCount();
+                });
+            });
+        
+            document.getElementById("viewCart").addEventListener("click", function () {
+                updateCartDisplay();
+            });
+        
+            function calculateTotalPrice() {
+                const totalPriceElement = document.getElementById("totalCost");
+                const totalPrice = shoppingCart.reduce((total, item) => {
+                    const itemPrice = parseFloat(item.price.replace('$', '')) || 0;
+                    const itemQuantity = item.quantity || 0;
+                    return total + (itemPrice * itemQuantity);
+                }, 0);
+                return totalPrice.toFixed(2); // Remove this line
+            }
+        
+            function updateTotalCostDisplay() {
+                const totalCostElement = document.getElementById('totalCost');
+                totalCostElement.textContent = `Total Price: $${calculateTotalPrice()}`;
+            }
+        
+            updateTotalCostDisplay();
+        
+            function updateCartItemCount() {
+                var cartItemCountElement = document.getElementById("cartItemCount");
+                var totalItems = shoppingCart.reduce((total, item) => total + item.quantity, 0);
+                if (totalItems > 0) {
+                    cartItemCountElement.style.display = "inline-block";
+                } else {
+                    cartItemCountElement.style.display = "none";
+                }
+                cartItemCountElement.innerText = totalItems.toString();
+            }
+        
+            function clickHidden() {
+                const confirmationMessage = document.getElementById("confirmationMessage");
+        
+                if (confirmationMessage.classList.contains("hidden")) {
+                    confirmationMessage.classList.remove("hidden");
+                    confirmationMessage.classList.add("visible");
+                    setTimeout(function () {
+                        confirmationMessage.classList.remove("visible");
+                        confirmationMessage.classList.add("hidden");
+                    }, 3000);
+                } else {
+                    confirmationMessage.classList.remove("visible");
+                    confirmationMessage.classList.add("hidden");
+                }
+            }
+            function checkout() {
+        const shoppingCart = JSON.parse(localStorage.getItem('shoppingCart')) || [];
+        const userId = '123';  // Replace with your actual user ID logic
+        const username = 'meira'
+
+        const checkoutData = {
+            userId,
+            username,
+            items: shoppingCart,
+        };
+
+        fetch('http://localhost:3000/checkout', {  // Update with the correct URL
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(checkoutData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                localStorage.removeItem('shoppingCart');
+                updateCartItemCountOnLoad();
+                updateCartDisplay();
+                clickHidden();
+            } else {
+                console.error('Checkout failed:', data.error);
+                // Handle checkout failure
+            }
+        })
+        .catch(error => {
+            console.error('Error during checkout:', error);
+        });
+    }
+    
+        </script>
+
+
+    </section>
+    <footer id = "about">
+
+        <div class = "footer">
+            <blockquote class = "d-flex justify-content-center">
+                <div class = "about_us">
+                    <h4 class = "text-white">About Us</h4>
+                    <p>After school, Kamal took the girls to the old house. It was very old and very dirty too. There was rubbish everywhere. The windows were broken and the walls were damp. It was scary. Amy didn’t like it. There were paintings of zombies and skeletons on the walls.</p>
+                </div>
+                <div class = "contact_info">
+                    <h4 class = "text-white">Contact Info</h4>
+                    <p>Address:Your address goes here, your demo address.
+                        <br>Phone : +777 777 77 77
+                        <br>Email : info@aitu.kz
+                    </p>
+                </div>
+                <div class = "imp_links">
+                    <h4 class = "text-white">For Customer</h4>
+                    <ul>
+                        <li><a href="#">Discounts</a></li>
+                        <li><a href="#">Delivery</a></li>
+                        <li><a href="#">Payment</a></li>
+                        <li><a href="#">Measurements</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class = "newsletter">
+                    <h4 class = "text-white">Newsletter</h4>
+                    <p>“We’re going to take photos for the school art competition,” said Kamal. Amy didn’t like it, but she didn’t say anything. “Where’s Grant?” asked Tara. “Er, he’s buying more paint.” Kamal looked away quickly. Tara thought he looked suspicious. “It’s getting dark, can we go now?” said Amy. She didn’t like zombies.</p>
+                </div>
+            </blockquote>
+            <h3>Stay With Us!</h3>
+            <ul class = "list-unstyled d-flex position-relative justify-content-center p-0">
+                <li><a class = "text-decoration-none fs-4 btn text-white" href = "#"><i class="fa-brands fa-facebook"></i></a></li>
+                <li><a class = "text-decoration-none fs-4 btn text-white" href = "#"><i class="fa-brands fa-instagram"></i></a></li>
+                <li><a class = "text-decoration-none fs-4 btn text-white" href = "#"><i class="fa-brands fa-twitter"></i></a></li>
+                <li><a class = "text-decoration-none fs-4 btn text-white" href = "#"><i class="fa-brands fa-linkedin"></i></a></li>
+                <li><a class = "text-decoration-none fs-4 btn text-white" href = "#"><i class="fa-brands fa-pinterest"></i></a></li>
+            </ul>
+            <div class="pt-4 text-white d-flex justify-content-center">
+                <p>Copyright &copy;2023 epicenter, designed by Meirambek</p>
+            </div>
+        </div>
+
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <!-- Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+    
+    <script src="lingumania.js"></script>
+</body>
+
+</html>

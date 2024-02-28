@@ -1,0 +1,14 @@
+
+
+<h1>Edit Item</h1>
+
+<form action="/admin/edit/<%=item._id%>" method="POST">
+    <label for="title">Title:</label>
+    <input type="text" name="title" value="<%= item && item.title %>" required>
+
+    <label for="price">Price:</label>
+    <input type="text" name="title" value="<%= item && item.price %>" required>
+    <label for="price">Image: URL</label>
+    <input type="url" name="image" id="image" accept="image/*">
+    <button type="submit">Save Changes</button>
+</form>

@@ -1,0 +1,170 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #fff;
+}
+ul {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    opacity: 0.7;
+}
+button {
+    cursor: pointer;
+}
+button:hover {
+    opacity: 0.7;
+}
+.right-img {
+    position: absolute;
+    width: 55%;
+    height: 100%;
+    right: 0;
+    border-bottom-left-radius: 80px;
+    border-top-left-radius: 80px;
+}
+
+header {
+    display: flex;
+    padding: 30px 190px;
+}
+header a {
+    color: #000;
+}
+.left-side {
+    display: flex;
+}
+.logo {
+    display: flex;
+    margin-top: 3px;
+    cursor: pointer;
+    margin-left:30px;
+}
+
+.google-account-btn {
+    width: 100%;
+    height: 42px;
+    background-color: transparent;
+    border-radius: 7px;
+    border: 1px solid #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.google-account-btn p {
+    margin:0;
+    padding-left: 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.signup-form {
+    display: block;
+    width: 320px;
+    height: 420px;
+    margin-left:200px;
+    margin-bottom: 60px;
+}
+.signup-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 26px;
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+}
+.signup-subtitle {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #6d6f7a;
+    margin-bottom: 35px;
+    letter-spacing: 0.015em;
+}
+form label {
+    display: flex;
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    margin-bottom: 7px;
+}
+form input {
+    width: 100%;
+    height: 40px;
+    padding: 2px 5px;
+    border: 1px solid #f0f2f4;
+    margin-left: 2px;
+    border-radius: 9px;
+    outline: none;
+}
+
+.login {
+    border: 0;
+    border-bottom: 2px solid #000;
+    border-radius: 0;
+    margin-top: 5px;
+}
+.login-form input:focus {
+    border: none;
+    border-bottom: 1px solid #000;
+}
+.checkbox-container {
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    margin-top: 15px;
+    font-family: 'Montserrat', sans-serif;
+}
+.checkbox-container a {
+    color: #000;
+    text-decoration: underline;
+}
+
+.checkbox-left {
+    display: flex;
+}
+.remember {
+    font-size: 13px;
+    margin-left: 5px;
+}
+
+.checkbox {
+    width: 13px;
+    height: 13px;
+}
+form button {
+    width: 100%;
+    height: 40px;
+    background-color: #000;
+    color: #fff;
+    margin-top: 10px;
+    border-radius: 5px;
+    margin-bottom: 12px;
+    cursor: pointer;
+}
+
+form p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    text-align: center;
+}
+p a {
+    color: #000;
+}
+.auth-footer-left {
+    position: absolute;
+    bottom: 7px;
+    left: 30px;
+    color: #8d8d8d;
+    font-family: 'Montserrat', sans-serif;
+}
+.auth-footer-right {
+    position: absolute;
+    bottom: 7px;
+    left: 230px;
+    color: #8d8d8d;
+    font-family: 'Montserrat', sans-serif;
+}

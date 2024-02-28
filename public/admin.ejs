@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Page</title>
+</head>
+<button><a href="/login">Main</a></button>
+<body>
+    <h1>Admin Page</h1>
+
+    <table border="1">
+        <tr>
+            <th>User ID</th>
+            <th>Username</th>
+            <th>Admin</th>
+            <th>Creation Date</th>
+            <th>Update Date</th>
+            <th>Deletion Date</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user._id %></td>
+                <td><%= user.username %></td>
+                <td><%= user.isAdmin %></td>
+                <td><%= user.creationDate %></td>
+                <td><%= user.updateDate %></td>
+                <td><%= user.deletionDate %></td>
+                <td>
+                    <form action="/admin/edit/<%= user._id %>" method="get">
+                        <button type="submit">Edit</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="/admin/delete/<%= user._id %>" method="post">
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+    
+
+    <h2>Add User</h2>
+    <form action="/admin/adduser" method="post">
+        <label for="newUsername">Username:</label>
+        <input type="text" id="newUsername" name="newUsername" required>
+
+        <label for="newPassword">Password:</label>
+        <input type="password" id="newPassword" name="newPassword" required>
+
+        <label for="isAdmin">Admin:</label>
+        <input type="checkbox" id="isAdmin" name="isAdmin">
+
+        <button type="submit">Add User</button>
+    </form>
+    <h2>Edit User</h2>
+    <% users.forEach(user => { %>
+        <h2>Edit User <%= user.username %></h2>
+        <form action="/admin/edit/<%= user._id %>" method="post">
+            <label for="editUsername">New Username:</label>
+            <input type="text" id="editUsername" name="username" value="<%= user.username %>" required>
+    
+            <label for="editPassword">New Password:</label>
+            <input type="password" id="editPassword" name="password" required>
+    
+            <label for="editAdmin">Admin:</label>
+            <input type="checkbox" id="editAdmin" name="isAdmin" <%= user.isAdmin ? 'checked' : '' %> >
+    
+            <button type="submit">Edit User</button>
+        </form>
+    <% }); %>
+
+    <h1>Admin Panel</h1>
+    <h3><a href="/admin/create">Create New Item</a></h3>
+    <% items.forEach(item => { %>
+        <h2>Edit Item <%= item.title %></h2>
+        <form action="/admin/edit-item/<%= item._id %>" method="POST">
+            <label for="editTitle">Title:</label>
+            <input type="text" name="title" value="<%= item.title %>" required>
+    
+            <label for="editPrice">Price:</label>
+            <input type="text" name="price" value="<%= item.price %>" required>
+            
+            <label for="editImage">Image:</label>
+            <input type="text" name="image" value="<%= item.image %>" required>
+            
+            <button type="submit">Save Changes</button>
+        </form>
+        <form action="/admin/delete-item/<%= item._id %>" method="post">
+            <button type="submit">Delete</button>
+        </form>
+    <% }); %>
+
+
+
+
+
+</body>
+
+</html>
