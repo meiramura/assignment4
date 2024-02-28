@@ -1,3 +1,6 @@
+## My Clothing Store 
+- Epicenter is type of clothing store where user can register, authorize, look for some clothes, add them to shopping cart and buy them from it.
+
 ## Features
 - User registration and login system.
 - Clothing store with real-time changing news api.
