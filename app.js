@@ -324,21 +324,25 @@ app.post('/login', async (req, res) => {
     try {
         const user = await User.findOne({ username });
 
-        if (user && user.password === password) {
-            if (user.isAdmin === true) {
+        if (user) {
+            const isPasswordValid = await verifyPassword(password, user.password);
+
+            if (isPasswordValid) {
+                if (user.isAdmin === true) {
+                    req.session.userId = user._id;
+                    req.session.isAdmin = true;  // Set isAdmin to true for admin
+                    req.session.username = user.username;
+                    return res.redirect('/admin');
+                }
+
                 req.session.userId = user._id;
-                req.session.isAdmin = true;  // Set isAdmin to true for admin
+                req.session.isAdmin = false; 
                 req.session.username = user.username;
-                return res.redirect('/admin');
+                return res.redirect('/main');
             }
-           
-            req.session.userId = user._id;
-            req.session.isAdmin = false; 
-            req.session.username = user.username;
-            return res.redirect('/main');
-        } else {
-            return res.render('login', { errorMessage: 'Invalid credentials' });
         }
+
+        return res.render('login', { errorMessage: 'Invalid credentials' });
     } catch (error) {
         console.error('Error during login:', error);
         return res.status(500).send('Internal Server Error');
